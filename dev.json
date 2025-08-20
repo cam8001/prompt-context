@@ -1,0 +1,60 @@
+{
+  "name": "dev",
+  "description": "Used for software development",
+  "prompt": null,
+  "mcpServers": {
+    "awslabs.aws-documentation-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.aws-documentation-mcp-server"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR",
+        "AWS_DOCUMENTATION_PARTITION": "aws"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "awslabs.cdk-mcp-server": {
+      "command": "uvx",
+      "args": ["awslabs.cdk-mcp-server"],
+      "env": {
+        "FASTMCP_LOG_LEVEL": "ERROR"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "aws-knowledge-mcp-server": {
+      "command": "uvx",
+      "args": [
+        "mcp-proxy",
+        "--transport",
+        "streamablehttp",
+        "https://knowledge-mcp.global.api.aws"
+      ]
+    }
+  },
+  "tools": ["*"],
+  "toolAliases": {},
+  "allowedTools": [
+    "fs_read",
+    "@awslabs.aws-documentation-mcp-server/read_documentation",
+    "@awslabs.aws-documentation-mcp-server/search_documentation",
+    "@awslabs.aws-documentation-mcp-server/recommend",
+    "@awslabs.cdk-mcp-server/CDKGeneralGuidance",
+    "@awslabs.cdk-mcp-server/CheckCDKNagSuppressions",
+    "@awslabs.cdk-mcp-server/ExplainCDKNagRule",
+    "@awslabs.cdk-mcp-server/GenerateBedrockAgentSchema",
+    "@awslabs.cdk-mcp-server/GetAwsSolutionsConstructPattern",
+    "@awslabs.cdk-mcp-server/LambdaLayerDocumentationProvider",
+    "@awslabs.cdk-mcp-server/SearchGenAICDKConstructs",
+    "@aws-knowledge-mcp-server/aws___read_documentation",
+    "@aws-knowledge-mcp-server/aws___recommend",
+    "@aws-knowledge-mcp-server/aws___search_documentation"
+  ],
+  "resources": [
+    "file:///Users/ctod/.aws/amazonq/prompts/my-coding-style.md",
+    "file://.amazonq/context/**/*.md"
+  ],
+  "hooks": {},
+  "toolsSettings": {},
+  "useLegacyMcpJson": true
+}
