@@ -22,14 +22,12 @@
       "disabled": false,
       "autoApprove": []
     },
-    "aws-knowledge-mcp-server": {
-      "command": "uvx",
-      "args": [
-        "mcp-proxy",
-        "--transport",
-        "streamablehttp",
-        "https://knowledge-mcp.global.api.aws"
-      ]
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"],
+      "env": {
+        "CONTEXT7_API_KEY": "$CONTEXT7_API_KEY"
+      }
     }
   },
   "tools": ["*"],
@@ -48,7 +46,9 @@
     "@awslabs.cdk-mcp-server/SearchGenAICDKConstructs",
     "@aws-knowledge-mcp-server/aws___read_documentation",
     "@aws-knowledge-mcp-server/aws___recommend",
-    "@aws-knowledge-mcp-server/aws___search_documentation"
+    "@aws-knowledge-mcp-server/aws___search_documentation",
+    "@context7/get-library-docs",
+    "@context7/resolve-library-id"
   ],
   "resources": [
     "file:///Users/ctod/.aws/amazonq/prompts/my-coding-style.md",
@@ -56,5 +56,5 @@
   ],
   "hooks": {},
   "toolsSettings": {},
-  "useLegacyMcpJson": true
+  "useLegacyMcpJson": false
 }
