@@ -11,12 +11,13 @@ down, but try to avoid them if you can.
 - Use IAM permissions boundaries if you can.
 
 # Configuration contexts
-- When asked, your preferred and default AWS region is `ap-southeast-2`
+- When asked, your preferred and default AWS region is `ap-southeast-6`, Asia-Pacific (New Zealand)
 
 # Code preferences
-
-- Check AWS documentation, using `awslabs.aws-documentation-mcp-server`, if you can and it will provide better quality outputs.
-- For CDK, check AWS CDK docs using `"awslabs.cdk-mcp-server`
+- Always use context7 when I need code generation, setup or configuration steps, or library/API documentation. This means you should automatically use the Context7 MCP tools to resolve library id and get library docs without me having to explicitly ask.
+- If you need to further check AWS documentation, use `awslabs.aws-documentation-mcp-server`, to provide better quality outputs.
+- If you need to further check CDK documentation, use `"awslabs.cdk-mcp-server`
+- Always use the latest versions of `cdk` and `aws-cdk-lib` from npm.
 
 ## Programming style
 - You favour clarity and good documentation. Commenting code is important to you.
@@ -59,7 +60,7 @@ let myvar:MyType = {
 
 ## Application architecture
 - You prefer to build serverless apps that have a web frontend, typically in React. The serverless frontend should be able to be hosted in S3, without relying on a server backend for basic interactions. Do not use Next.js or any server side rendering (SSR) unless specifically asked to. However, if you feel that an SSR is the right choice, let the user know.
-- Any component that is meant to be accessed via a web browser should have a Cloudfront distribution in front of it. If in front of an S3 bucket, the Cloudfront should use an Origin Access Control (OAC) configuration to secure access to the bucket.
+- Any component that is meant to be accessed via a web browser should have a Cloudfront distribution in front of it. If in front of an S3 bucket, the Cloudfront should use an Origin Access Control (OAC) configuration to secure access to the bucket. Do not configure the bucket for website hosting; instead, allow the OAC and Cloudfront to manage that.
 - React should use Typescript.
 - Lambda functions should either Typescript (preferred), or Python, depending on the suitability for the workload.
 - Depending on the application, you should favour, in this order: Amazon APIs (for example, the Dynamo DB Javascript API), when interacting directly with Amazon services; Lambda Function URLs; API Gateway.
@@ -71,7 +72,7 @@ let myvar:MyType = {
 - For python, prefer uv.
 - For Typescript and Javascript, prefer npm.
 - Prefer the most recent Python and Lambda runtimes supported on AWS. You can use the version string `NODEJS_LATEST` for the Function.runtime for Lambda javascript/typescript functions. Use whatever the highest version of the Python runtime is that is available (for example, as at 1 August 2025, `PYTHON_3_13`).
-- Try to use CDK's default packaging for Lambda functions when building if possible. For speed of build, use a local and globally installed `esbuild` instead of the container that AWS provides. Advise if esbuild is not installed locally.
+- Try to use CDK's default packaging for Lambda functions when building if possible. For speed of build, use a local and globally installed `esbuild` instead of the container that AWS provides. Advise if esbuild is not installed locally. Inform the user if it is.
 - Use the dedicated `aws_lambda_python.PythonFunction` for python runtime lambdas, and `aws_lambda_nodejs.NodejsFunction` for node.js
 
 
@@ -99,6 +100,8 @@ let myvar:MyType = {
 
 ## Infrastructure management
 - You prefer to use CDK whenever possible for infrastructure management. Your preferred language for CDK is Typescript.
+- Before starting a project, you make sure you have the latest versions of `cdk`, `aws-cdk`, and `aws-cdk-lib` available. You can use `npx` to favour project-level npm packages over globaly ones.
+- If starting a totally new project, use `cdk init app --language typescript` rather than manually adding files.
 - In a CDK code structure, you like to keep the source code for Lambdas and web apps in a `/src` directory at the root of the project. Here are some examples:
   - A Lambda called 'writeNewRecord' would be kept in `/src/lambda/writeNewRecord`
   - A Lambda called 'updateLogTimestamp' would be kept in `/src/lambda/updateLogTimestamp`
@@ -108,7 +111,6 @@ let myvar:MyType = {
 # Debugging
 
 - Sometimes, the user will give you read access to their AWS account
-- You will not try to mutate AWS resources; if you need to, you will ask the user to
-and suggest best approaches.
+- You will not try to mutate AWS resources; if you need to, you will ask the user to and suggest best approaches.
 - Typically, those approaches will involve updating CDK code.
 - You can also give `aws` cli commands as examples, outputting them to the user to run themselves.
