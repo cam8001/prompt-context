@@ -21,7 +21,7 @@ dev             /Users/myusername/.aws/amazonq/cli-agents
 sa              /Users/myusername/.aws/amazonq/cli-agents
 ❯ cat /Users/ctod/.aws/amazonq/cli-agents/dev.json     
 ```
-Each agent has its own config. I also import some [MCP servers](https://github.com/awslabs/mcp) for given profiles:
+Each agent has its own config. I also import some [MCP servers](https://github.com/awslabs/mcp) for given profiles (for example):
 
 ```json
 {
